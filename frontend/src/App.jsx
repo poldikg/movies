@@ -41,7 +41,6 @@ function App() {
         image={movie.poster_path}
         rating={movie.vote_average}
         overview={movie.overview}
-
         />
       })
 
