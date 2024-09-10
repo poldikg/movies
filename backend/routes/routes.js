@@ -1,18 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const {postMovieReview} = require("../controllers/controller")
+const {PostMovieReview, DeleteMovieReview, UpdateMovieReview} = require("../controllers/controller")
 
 //POST 
-router.post("/", postMovieReview)
+router.post("/", PostMovieReview)
 
 //DELETE a review
-router.delete("/:id", (req, res) => {
-    res.json({msg: "Movie Review Deleted"})
-})
+router.delete("/:id", DeleteMovieReview)
 
-router.patch("/:id", (req, res) => {
-    res.json({msg: "Movie Review Updated"})
-})
+//Update A review
+router.patch("/:id", UpdateMovieReview)
 
 
 module.exports = router;
