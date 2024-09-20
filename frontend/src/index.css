@@ -1,6 +1,26 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: "Fredoka", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: var(--color-background);
+  /* Fonts */
+  --text-header-homepage: "Kurale";
+  --text-paragraph: "Fredoka";
+  --text-paragraph-italic: "Montserrat";
+
+  /* Colors */
+  --color-background: #272D2D;
+  --color-background2: #2E3333;
+  --color-text-white: #FEFEFE;
+  --color-text-green: #6DAA7A;
+  --color-button-dark-green: #1B8B34;
+  --color-button-light-green: #565B51;
+  --color-button-light-blue: #50A2A7;
+  --color-statistic-green: #56CD94;
+
+
+
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
