@@ -1,0 +1,24 @@
+.home-page-movies {
+    background-color: var(--color-background2);
+    height: auto;
+    width: 65%;
+    border-radius: 8px;
+    margin-top: 2em;
+    padding: 2em 2em;
+}
+
+.movies-of-the-day>h1 {
+    color: white;
+    font-family: "Fredoka";
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+
+.movies-of-the-day-posters {
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
