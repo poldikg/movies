@@ -1,0 +1,11 @@
+.hover-background-change {
+    width: 97%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    overflow-x: auto;
+    background-position: center;
+    border-radius: 4px;
+    padding: 1.5em 0.5em 0.5em 0.5em;
+}

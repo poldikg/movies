@@ -1,19 +1,19 @@
 import { React, useEffect, useState } from "react";
 import "./HomePageMovies.css"
 import MoviePoster from "../MoviePoster/MoviePoster";
+import PostersSlider from "../PostersSlider/PostersSlider";
+import HoverBackgroundChange from "../HoverBackgroundChange/HoverBackgroundChange";
 
 
 
 const HomePageMovies = () => {
     const [popularMovies, setPopularMovies] = useState([]);
-    const [popularMovie1, setPopularMovie1] = useState();
-    const [popularMovie2, setPopularMovie2] = useState();
-    const [popularMovie3, setPopularMovie3] = useState();
     const [moviesOfTheDay, setMoviesOfTheDay] = useState([]);
-
+    const [upcomingMovies, setUpcomingMovies] = useState([]);
+    const [trendingPeople, setTrendingPeople] = useState([]);
+    console.log(upcomingMovies)
 
     useEffect(() => {
-
         const fetchPopularMovies = async () => {
             const url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
             const options = {
@@ -45,8 +45,47 @@ const HomePageMovies = () => {
             }
 
         }
+        const fetchUpcomingMovies = async () => {
 
+            const url = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzA4NDk5NS45NDQ3MjMsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8THBfEHhxN7-CxGZmqvuCAKSUGLZEBKaBfrZi7f9Qm8'
+                }
+            };
+
+            const response = await fetch(url, options);
+            const json = await response.json();
+
+            if (response.ok) {
+                setUpcomingMovies(json.results)
+            }
+        }
+
+        const fetchTrendingPeople = async () => {
+            const url = 'https://api.themoviedb.org/3/person/popular?language=en-US&page=1';
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzA4NDk5NS45NDQ3MjMsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8THBfEHhxN7-CxGZmqvuCAKSUGLZEBKaBfrZi7f9Qm8'
+                }
+            };
+
+            const response = await fetch(url, options);
+            const json = await response.json();
+
+            if (response.ok) {
+                setTrendingPeople(json.results)
+            }
+        }
+
+        fetchUpcomingMovies();
         fetchPopularMovies();
+        fetchTrendingPeople();
+
 
     }, [])
 
@@ -57,6 +96,7 @@ const HomePageMovies = () => {
         }
 
     }, [popularMovies])
+
 
     console.log(moviesOfTheDay)
 
@@ -75,11 +115,26 @@ const HomePageMovies = () => {
     })
 
     return <div className="home-page-movies">
-        <div className="movies-of-the-day">
-            <h1>MOVIES OF THE DAY</h1>
+        <div className="movies-of-the-day distance">
+            <h1 className="homepage-h1">MOVIES OF THE DAY</h1>
             <div className="movies-of-the-day-posters">
                 {moviesDayRender}
             </div>
+        </div>
+        <div className="upcoming-movies distance">
+            <h1 className="homepage-h1"> UPCOMING MOVIES</h1>
+            <PostersSlider
+                type={"upcomingMovies"}
+                movies={upcomingMovies}
+            />
+        </div>
+        <div className="trending-people distance">
+            <h1 className="homepage-h1"> TRENDING PEOPLE </h1>
+            <HoverBackgroundChange
+                type={"people"}
+                data={trendingPeople}
+            />
+
         </div>
     </div>
 }

@@ -1,0 +1,26 @@
+.posters-slider {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    overflow-x: scroll;
+    padding-bottom: 1em;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 8px;
+}
+
+/* Track */
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-button-light-green);
+    border-radius: 10px;
+}
+
+/* Handle on hover
