@@ -11,7 +11,30 @@ const HomePageMovies = () => {
     const [moviesOfTheDay, setMoviesOfTheDay] = useState([]);
     const [upcomingMovies, setUpcomingMovies] = useState([]);
     const [trendingPeople, setTrendingPeople] = useState([]);
-    console.log(upcomingMovies)
+    const [idUpcomingMovies, setIdUpcomingMovies] = useState([]);
+    const [trailerUpcomingMovies, setTrailerUpcomingMovies] = useState([]);
+    console.log(trailerUpcomingMovies)
+
+
+    const fetchMovieVideos = async (id) => {
+        const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzQyOTM4Ni44NzgzODQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MfhjKgYoYqw_abikNQedx4fJ26Z6PdT36WqSgZ5XyrM'
+            }
+        };
+
+        const response = await fetch(url, options);
+        const json = await response.json();
+
+        const filterTrailer = json.results.filter(video => video.type === "Trailer");
+        filterTrailer[0].idMovie = id;
+
+        setTrailerUpcomingMovies(prevArr => [...prevArr, filterTrailer[0]]);
+
+    }
 
     useEffect(() => {
         const fetchPopularMovies = async () => {
@@ -58,9 +81,10 @@ const HomePageMovies = () => {
 
             const response = await fetch(url, options);
             const json = await response.json();
-
+            const idUpcomingMovies = json.results.map(movie => movie.id)
             if (response.ok) {
                 setUpcomingMovies(json.results)
+                setIdUpcomingMovies(idUpcomingMovies);
             }
         }
 
@@ -86,7 +110,6 @@ const HomePageMovies = () => {
         fetchPopularMovies();
         fetchTrendingPeople();
 
-
     }, [])
 
     useEffect(() => {
@@ -97,8 +120,11 @@ const HomePageMovies = () => {
 
     }, [popularMovies])
 
-
-    console.log(moviesOfTheDay)
+    useEffect(() => {
+        if (trailerUpcomingMovies.length < 1) {
+            idUpcomingMovies.map(id => fetchMovieVideos(id))
+        }
+    }, [popularMovies])
 
     const moviesDayRender = moviesOfTheDay.map(movie => {
         return <MoviePoster
@@ -134,8 +160,16 @@ const HomePageMovies = () => {
                 type={"people"}
                 data={trendingPeople}
             />
-
         </div>
+        <div className="trending-people distance">
+            <h1 className="homepage-h1"> TRAILERS </h1>
+            <HoverBackgroundChange
+                type={"trailer"}
+                data={trailerUpcomingMovies}
+            />
+        </div>
+
+
     </div>
 }
 

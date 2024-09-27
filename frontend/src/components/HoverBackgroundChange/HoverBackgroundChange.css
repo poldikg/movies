@@ -1,11 +1,14 @@
 .hover-background-change {
-    width: 97%;
-    height: auto;
+    width: 99%;
+    height: 200px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 2em;
     overflow-x: auto;
-    background-position: center;
+    background-position: top;
     border-radius: 4px;
     padding: 1.5em 0.5em 0.5em 0.5em;
+    box-shadow: inset 0px 10px 10px 10px var(--color-background2), inset 0px -15px 10px 0 var(--color-background2);
+    transition: 0.5s ease-in;
 }
