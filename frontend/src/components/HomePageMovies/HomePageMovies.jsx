@@ -3,6 +3,7 @@ import "./HomePageMovies.css"
 import MoviePoster from "../MoviePoster/MoviePoster";
 import PostersSlider from "../PostersSlider/PostersSlider";
 import HoverBackgroundChange from "../HoverBackgroundChange/HoverBackgroundChange";
+import BackgroundChnageTrailer from "../BackgroundChangeTrailer/BackgroundChangeTrailer";
 
 
 
@@ -13,11 +14,15 @@ const HomePageMovies = () => {
     const [trendingPeople, setTrendingPeople] = useState([]);
     const [idUpcomingMovies, setIdUpcomingMovies] = useState([]);
     const [trailerUpcomingMovies, setTrailerUpcomingMovies] = useState([]);
+    const [trendingMovies, setTrendingMovies] = useState([]);
+    const [trendingTV, setTrendingTV] = useState([]);
+    const [showTrendingMovies, setShowTrendingMovies] = useState(true);
     console.log(trailerUpcomingMovies)
 
 
     const fetchMovieVideos = async (id) => {
-        const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+        const urlTrailer = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+        const urlDetails = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
         const options = {
             method: 'GET',
             headers: {
@@ -25,12 +30,14 @@ const HomePageMovies = () => {
                 Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzQyOTM4Ni44NzgzODQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MfhjKgYoYqw_abikNQedx4fJ26Z6PdT36WqSgZ5XyrM'
             }
         };
+        const responseTrailer = await fetch(urlTrailer, options);
+        const json = await responseTrailer.json();
 
-        const response = await fetch(url, options);
-        const json = await response.json();
 
         const filterTrailer = json.results.filter(video => video.type === "Trailer");
-        filterTrailer[0].idMovie = id;
+        filterTrailer[0].movieId = id;
+
+
 
         setTrailerUpcomingMovies(prevArr => [...prevArr, filterTrailer[0]]);
 
@@ -106,6 +113,44 @@ const HomePageMovies = () => {
             }
         }
 
+        const fetchTrendingMovies = async () => {
+            const url = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US';
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzUxNjY4NC45MTIwMzQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UA40NmGvMZx4QZQ3ojxN4WtzrHHCMLgUuh7E0C_0uic'
+                }
+            };
+
+            const response = await fetch(url, options);
+            const json = await response.json();
+            console.log(json)
+            if (response.ok) {
+                setTrendingMovies(json.results)
+            }
+        }
+
+        const fetchTrendingTV = async () => {
+            const url = 'https://api.themoviedb.org/3/trending/tv/week?language=en-US';
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzUxNjY4NC45MTIwMzQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UA40NmGvMZx4QZQ3ojxN4WtzrHHCMLgUuh7E0C_0uic'
+                }
+            };
+
+            const response = await fetch(url, options);
+            const json = await response.json();
+
+            if (response.ok) {
+                setTrendingTV(json.results)
+            }
+        }
+
+        fetchTrendingTV();
+        fetchTrendingMovies();
         fetchUpcomingMovies();
         fetchPopularMovies();
         fetchTrendingPeople();
@@ -140,7 +185,37 @@ const HomePageMovies = () => {
         />
     })
 
+    const renderTrendingMovies = trendingMovies.map(movie => {
+        return <MoviePoster
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            synopsis={movie.overview}
+            popularity={movie.popularity}
+            poster={movie.poster_path}
+            release_date={movie.release_date}
+            original_title={movie.original_title}
+            score={movie.vote_average}
+        />
+    })
+
+    const renderTrendingTV = trendingTV.map(tv => {
+        return <MoviePoster
+            key={tv.id}
+            id={tv.id}
+            title={tv.title}
+            synopsis={tv.overview}
+            popularity={tv.popularity}
+            poster={tv.poster_path}
+            release_date={tv.release_date}
+            original_title={tv.original_title}
+            score={tv.vote_average}
+        />
+    })
+
+
     return <div className="home-page-movies">
+
         <div className="movies-of-the-day distance">
             <h1 className="homepage-h1">MOVIES OF THE DAY</h1>
             <div className="movies-of-the-day-posters">
@@ -157,18 +232,19 @@ const HomePageMovies = () => {
         <div className="trending-people distance">
             <h1 className="homepage-h1"> TRENDING PEOPLE </h1>
             <HoverBackgroundChange
-                type={"people"}
                 data={trendingPeople}
             />
         </div>
-        <div className="trending-people distance">
+        <div className="trailers distance">
             <h1 className="homepage-h1"> TRAILERS </h1>
-            <HoverBackgroundChange
-                type={"trailer"}
+            <BackgroundChnageTrailer
                 data={trailerUpcomingMovies}
             />
         </div>
-
+        <div className="trending distance">
+            <div className="trending-upper"><h1 className="homepage-h1"> TRENDING:  </h1> <button className="trending-btn-change" onClick={() => { setShowTrendingMovies(true) }} > Movies </button> <button className="trending-btn-change" onClick={() => { setShowTrendingMovies(false) }}> TV </button></div>
+            <div className="trending-movies-tv">{showTrendingMovies ? renderTrendingMovies : renderTrendingTV}</div>
+        </div>
 
     </div>
 }

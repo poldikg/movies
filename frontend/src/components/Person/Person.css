@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 2em;
     gap: 0.5em;
     z-index: 3;
 }
 
-img {
-    width: 135px;
-    height: 130px;
+.person>img {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     display: block;
     cursor: pointer;
@@ -16,4 +17,5 @@ img {
 
 .person-name {
     color: var(--color-text-white);
+    text-align: center;
 }
