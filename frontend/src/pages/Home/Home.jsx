@@ -5,7 +5,9 @@ import HomePageMovies from "../../components/HomePageMovies/HomePageMovies";
 
 const Home = () => {
     return <div className="home">
-        <PictureHolder />
+        <PictureHolder
+            page={"home"}
+        />
         <HomePageMovies />
     </div>
 }

@@ -4,6 +4,7 @@ import Home from './pages/Home/Home'
 import Header from "./components/Header/Header"
 import Movie from './pages/Movie/Movie'
 import Profile from './pages/Profile/Profile'
+import MovieList from './pages/MovieList/MovieList'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path='/Movie' element={<Movie />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/MovieList" element={<MovieList />} />
       </Routes>
 
     </div>
