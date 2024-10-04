@@ -22,7 +22,6 @@ const HomePageMovies = () => {
 
     const fetchMovieVideos = async (id) => {
         const urlTrailer = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
-        const urlDetails = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
         const options = {
             method: 'GET',
             headers: {

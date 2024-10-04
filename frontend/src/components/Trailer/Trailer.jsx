@@ -7,6 +7,7 @@ const Trailer = (props) => {
     console.log(props)
     const [movieDetails, setMovieDetails] = useState([]);
     useEffect(() => {
+
         const fetchDetails = async (id) => {
             const urlDetails = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
             const options = {
