@@ -17,7 +17,14 @@ const Movie = () => {
     const [trailer, setTrailer] = useState([]);
     const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
-    console.log(cast, crew, similarMovies, movieDetails)
+    const [toggleMovieDetails, setToggleMovieDetails] = useState({
+        cast: true,
+        crew: false,
+        genre: false,
+        more: false
+    })
+
+    console.log(cast, crew, similarMovies, movieDetails, toggleMovieDetails)
     useEffect(() => {
 
         const fetchCast = async () => {
@@ -115,6 +122,19 @@ const Movie = () => {
     }, [movieDetails])
 
 
+    const castMembers = cast.map(member => {
+        return <div className="movie-button-redirect">{member.name}</div>
+    })
+
+    let genresMovie = [];
+    if (movieDetails.hasOwnProperty("genres")) {
+        genresMovie = movieDetails.genres.map(genre => {
+            return <div className="movie-button-redirect">{genre.name}</div>
+        })
+    }
+
+
+
 
     return <div>
         <div className="movie-trailer" style={{ zIndex: isTrailerOpen ? 2 : -2, display: isTrailerOpen ? "flex" : "none" }}>
@@ -156,6 +176,28 @@ const Movie = () => {
 
         </div>
 
+        <div className="movie-details">
+
+            <div className="movie-details-toggle-section">
+                <div className="movie-details-toggle">
+                    <button className="movie-details-buttons" style={toggleMovieDetails.cast ? { borderBottom: "1px solid #6DAA7A" } : {}} onClick={() => { setToggleMovieDetails({ crew: false, more: false, genre: false, cast: true }) }}> Cast </button>
+                    <button className="movie-details-buttons" style={toggleMovieDetails.crew ? { borderBottom: "1px solid #6DAA7A" } : {}} onClick={() => { setToggleMovieDetails({ crew: true, more: false, genre: false, cast: false }) }}> Crew </button>
+                    <button className="movie-details-buttons" style={toggleMovieDetails.genre ? { borderBottom: "1px solid #6DAA7A" } : {}} onClick={() => { setToggleMovieDetails({ crew: false, more: false, genre: true, cast: false }) }}> Genre </button>
+                    <button className="movie-details-buttons" style={toggleMovieDetails.more ? { borderBottom: "1px solid #6DAA7A" } : {}} onClick={() => { setToggleMovieDetails({ crew: false, more: true, genre: false, cast: false }) }}> More </button>
+                </div>
+
+                {toggleMovieDetails.cast ? <div className="movie-cast"> {castMembers} </div> :
+                    toggleMovieDetails.crew ? <div> crew </div> :
+                        toggleMovieDetails.genre ? <div className="movie-cast"> {genresMovie} </div> :
+                            toggleMovieDetails.more ? <div className="movie-more-information"> <p>Original Title: {props.original_title}</p> <p>Release date: {props.release_date} </p> </div> : ""}
+            </div>
+
+            <div>
+                <h2>News about the movie</h2>
+                <h3>Currently no news</h3>
+            </div>
+
+        </div>
     </div>
 }
 

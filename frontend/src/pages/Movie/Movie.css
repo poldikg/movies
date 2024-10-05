@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: rgba(185, 55, 55, 0.5);
 }
 
 .movie-inner-background {
@@ -108,4 +109,65 @@
 .movie-play-trailer:hover {
     background-color: rgba(247, 247, 247, 0.5);
     color: var(--color-background2);
+}
+
+.movie-details {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.movie-details-toggle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1em;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 0.4em;
+    width: 50%;
+}
+
+.movie-details-toggle-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+
+.movie-details-buttons {
+    border: none;
+    color: var(--color-text-green);
+    background: none;
+    cursor: pointer;
+    font-family: "Fredoka";
+    font-size: 1.2rem;
+}
+
+.movie-button-redirect {
+    background-color: var(--color-button-light-green);
+    color: var(--color-text-green);
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0.5em 1em;
+    font-size: 0.9rem;
+}
+
+.movie-cast {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: start;
+    gap: 1em;
+    width: 50%;
+    margin-top: 0.5em;
+}
+
+.movie-more-information>p {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
 }
