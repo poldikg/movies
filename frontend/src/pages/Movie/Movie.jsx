@@ -3,6 +3,7 @@ import "./Movie.css"
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import MoviePoster from "../../components/MoviePoster/MoviePoster";
+import { userReviews } from "./UserReviews";
 
 const Movie = () => {
 
@@ -121,6 +122,64 @@ const Movie = () => {
 
     }, [movieDetails])
 
+    useEffect(() => {
+
+        if (crew.length > 0) {
+            const crewDepartments = crew.map(member => member.known_for_department)
+
+            for (let i = 0; i < crewDepartments.length; i++) {
+
+                for (let j = i; j < crewDepartments.length; j++) {
+                    if (crewDepartments[i] === crewDepartments[j]) {
+                        crewDepartments.splice(j, 1)
+                    }
+                }
+            }
+
+            const departmentsArr = [];
+            for (let i = 0; i < crewDepartments.length; i++) {
+
+                for (let j = i; j < crew.length; j++) {
+                    if (crewDepartments[i] === crew[j].known_for_department) {
+                        departmentsArr.push({
+                            [crewDepartments[i]]: crew[j]
+                        })
+                    }
+                }
+            }
+
+            function mergeObjectsByKey(arr) {
+                const result = {};
+
+                arr.forEach(obj => {
+                    // Iterate through each key-value pair of the object
+                    Object.keys(obj).forEach(key => {
+                        console.log(obj)
+                        console.log(key)
+                        // If the key is already in the result, add the value to the array
+                        if (result[key]) {
+                            result[key].push(obj);
+                        } else {
+                            // Otherwise, create a new array with the value
+                            result[key] = [obj];
+                        }
+                    });
+                });
+
+                return result;
+            }
+
+            let mergedData = mergeObjectsByKey(departmentsArr);
+
+            console.log(mergedData)
+        }
+
+
+
+
+
+    }, [crew])
+
 
     const castMembers = cast.map(member => {
         return <div className="movie-button-redirect">{member.name}</div>
@@ -133,6 +192,31 @@ const Movie = () => {
         })
     }
 
+    const renderUserReviews = userReviews.map(review => {
+        return <div className="user-review">
+            <div>
+                <img className="user-review-img" src={review.img} alt="" srcset="" />
+            </div>
+            <div className="user-review-text">
+                <p className="user-review-name">{review.name}</p>
+                <p className="user-review-review">{review.review}</p>
+            </div>
+        </div>
+    })
+
+    const renderSimilarMovies = similarMovies.map(movie => {
+        return <MoviePoster
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            synopsis={movie.overview}
+            popularity={movie.popularity}
+            poster={movie.poster_path}
+            release_date={movie.release_date}
+            original_title={movie.original_title}
+            score={movie.vote_average}
+        />
+    })
 
 
 
@@ -190,6 +274,18 @@ const Movie = () => {
                     toggleMovieDetails.crew ? <div> crew </div> :
                         toggleMovieDetails.genre ? <div className="movie-cast"> {genresMovie} </div> :
                             toggleMovieDetails.more ? <div className="movie-more-information"> <p>Original Title: {props.original_title}</p> <p>Release date: {props.release_date} </p> </div> : ""}
+
+                <div className="movie-user-reviews">
+                    <p>User Reviews</p>
+                    {renderUserReviews}
+                </div>
+
+                <div className="movie-similar-movies">
+                    <p>Similar Movies</p>
+                    <div className="movie-rendered-similar-movies">
+                        {renderSimilarMovies}
+                    </div>
+                </div>
             </div>
 
             <div>

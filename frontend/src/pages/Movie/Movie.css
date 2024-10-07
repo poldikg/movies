@@ -113,6 +113,7 @@
 
 .movie-details {
     margin-top: 2em;
+    margin-bottom: 2em;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -121,7 +122,7 @@
 .movie-details-toggle {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     gap: 1em;
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     padding-bottom: 0.4em;
@@ -170,4 +171,66 @@
 .movie-more-information>p {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
+}
+
+.movie-user-reviews {
+    width: 50%;
+    margin-top: 2em;
+}
+
+.movie-user-reviews>p {
+    color: var(--color-text-green);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    padding: 0.2em;
+    margin-bottom: 0.8em;
+}
+
+.user-review {
+    display: flex;
+    gap: 0.5em;
+    align-items: start;
+    margin-bottom: 0.8em;
+}
+
+.user-review-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-review-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.user-review-name {
+    color: var(--color-text-green);
+    font-weight: 400;
+    margin-bottom: 0.5em;
+
+}
+
+.user-review-review {
+    color: var(--color-text-white);
+    font-weight: 300;
+}
+
+.movie-similar-movies {
+    width: 50%;
+}
+
+.movie-similar-movies>p {
+    color: var(--color-text-green);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    padding: 0.2em;
+    margin-bottom: 0.8em;
+}
+
+.movie-rendered-similar-movies {
+    width: 100%;
+    display: flex;
+    gap: 0.5em;
+    overflow-x: auto;
 }
