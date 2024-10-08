@@ -124,54 +124,74 @@ const Movie = () => {
 
     useEffect(() => {
 
+        // if (crew.length > 0) {
+        //     const crewDepartments = crew.map(member => member.known_for_department)
+
+        //     for (let i = 0; i < crewDepartments.length; i++) {
+
+        //         for (let j = i; j < crewDepartments.length; j++) {
+        //             if (crewDepartments[i] === crewDepartments[j]) {
+        //                 crewDepartments.splice(j, 1)
+        //             }
+        //         }
+        //     }
+
+        //     const departmentsArr = [];
+        //     for (let i = 0; i < crewDepartments.length; i++) {
+
+        //         for (let j = i; j < crew.length; j++) {
+        //             if (crewDepartments[i] === crew[j].known_for_department) {
+        //                 departmentsArr.push({
+        //                     [crewDepartments[i]]: crew[j]
+        //                 })
+        //             }
+        //         }
+        //     }
+
+        //     function mergeObjectsByKey(arr) {
+        //         const result = {};
+
+        //         arr.forEach(obj => {
+        //             // Iterate through each key-value pair of the object
+        //             Object.keys(obj).forEach(key => {
+
+        //                 // If the key is already in the result, add the value to the array
+        //                 if (result[key]) {
+        //                     result[key].push(obj);
+        //                 } else {
+        //                     // Otherwise, create a new array with the value
+        //                     result[key] = [obj];
+        //                 }
+        //             });
+        //         });
+
+        //         return result;
+        //     }
+
+        //     let mergedData = mergeObjectsByKey(departmentsArr);
+
+        //     console.log(mergedData)
+        // }
+
         if (crew.length > 0) {
-            const crewDepartments = crew.map(member => member.known_for_department)
+            const sortedDepartments = [];
 
-            for (let i = 0; i < crewDepartments.length; i++) {
+            for (let i = 0; i < crew.length; i++) {
+                let found = false;
 
-                for (let j = i; j < crewDepartments.length; j++) {
-                    if (crewDepartments[i] === crewDepartments[j]) {
-                        crewDepartments.splice(j, 1)
+                for (let j = 0; j < sortedDepartments.length; j++) {
+                    if (crew[i].known_for_department === sortedDepartments[j][0].known_for_department) {
+                        sortedDepartments[j].push(crew[i]);
+                        found = true;
                     }
                 }
-            }
 
-            const departmentsArr = [];
-            for (let i = 0; i < crewDepartments.length; i++) {
 
-                for (let j = i; j < crew.length; j++) {
-                    if (crewDepartments[i] === crew[j].known_for_department) {
-                        departmentsArr.push({
-                            [crewDepartments[i]]: crew[j]
-                        })
-                    }
+                if (!found) {
+                    sortedDepartments.push([crew[i]]);
                 }
             }
-
-            function mergeObjectsByKey(arr) {
-                const result = {};
-
-                arr.forEach(obj => {
-                    // Iterate through each key-value pair of the object
-                    Object.keys(obj).forEach(key => {
-                        console.log(obj)
-                        console.log(key)
-                        // If the key is already in the result, add the value to the array
-                        if (result[key]) {
-                            result[key].push(obj);
-                        } else {
-                            // Otherwise, create a new array with the value
-                            result[key] = [obj];
-                        }
-                    });
-                });
-
-                return result;
-            }
-
-            let mergedData = mergeObjectsByKey(departmentsArr);
-
-            console.log(mergedData)
+            console.log(sortedDepartments)
         }
 
 
