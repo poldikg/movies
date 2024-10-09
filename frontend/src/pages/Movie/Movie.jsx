@@ -16,6 +16,7 @@ const Movie = () => {
     const [similarMovies, setSimiliarMovies] = useState([]);
     const [movieDetails, setMovieDetails] = useState([]);
     const [trailer, setTrailer] = useState([]);
+    const [sortedDepartments, setSortedDepartments] = useState([]);
     const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
     const [toggleMovieDetails, setToggleMovieDetails] = useState({
@@ -25,7 +26,7 @@ const Movie = () => {
         more: false
     })
 
-    console.log(cast, crew, similarMovies, movieDetails, toggleMovieDetails)
+    console.log(cast, crew, similarMovies, movieDetails, toggleMovieDetails, sortedDepartments)
     useEffect(() => {
 
         const fetchCast = async () => {
@@ -191,6 +192,7 @@ const Movie = () => {
                     sortedDepartments.push([crew[i]]);
                 }
             }
+            setSortedDepartments(sortedDepartments);
             console.log(sortedDepartments)
         }
 
@@ -238,6 +240,15 @@ const Movie = () => {
         />
     })
 
+
+    const renderSortedDepartments = sortedDepartments.map(department => {
+        return <div className="movie-department">
+            <div className="movie-department-title">{department[0].known_for_department} ---</div>
+            {department.map(person => (
+                <div className="movie-button-redirect"> {person.name} </div>
+            ))}
+        </div>
+    })
 
 
     return <div>
@@ -291,7 +302,7 @@ const Movie = () => {
                 </div>
 
                 {toggleMovieDetails.cast ? <div className="movie-cast"> {castMembers} </div> :
-                    toggleMovieDetails.crew ? <div> crew </div> :
+                    toggleMovieDetails.crew ? <div className="movie-cast"> {renderSortedDepartments} </div> :
                         toggleMovieDetails.genre ? <div className="movie-cast"> {genresMovie} </div> :
                             toggleMovieDetails.more ? <div className="movie-more-information"> <p>Original Title: {props.original_title}</p> <p>Release date: {props.release_date} </p> </div> : ""}
 

@@ -232,3 +232,14 @@
     gap: 0.5em;
     overflow-x: auto;
 }
+
+.movie-department {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.movie-department-title {
+    font-size: 1.1rem;
+    color: var(--color-text-white);
+}
