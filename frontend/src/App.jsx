@@ -5,6 +5,7 @@ import Header from "./components/Header/Header"
 import Movie from './pages/Movie/Movie'
 import Profile from './pages/Profile/Profile'
 import MovieList from './pages/MovieList/MovieList'
+import Footer from './components/Footer/Footer'
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
   console.log(currentLocation)
 
   return (
-    <div>
+    <div className='app'>
       <Header />
       {currentLocation === "/" && <Home />}
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/MovieList" element={<MovieList />} />
       </Routes>
 
+      <Footer />
     </div>
   )
 }

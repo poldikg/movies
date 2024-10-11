@@ -26,6 +26,18 @@ const Movie = () => {
         more: false
     })
 
+    const ratingMovieBad = { backgroundColor: "#EBEF7C" };
+    const ratingMovieDecent = { backgroundColor: "#EBEF7C" };
+    const ratingMovieGood = { backgroundColor: "#56CD94" };
+
+    const score = props.score ? props.score : props.vote_average
+
+    useEffect(() => {
+
+        window.scrollTo(0, 0)
+
+    }, [])
+
     console.log(cast, crew, similarMovies, movieDetails, toggleMovieDetails, sortedDepartments)
     useEffect(() => {
 
@@ -187,7 +199,6 @@ const Movie = () => {
                     }
                 }
 
-
                 if (!found) {
                     sortedDepartments.push([crew[i]]);
                 }
@@ -195,10 +206,6 @@ const Movie = () => {
             setSortedDepartments(sortedDepartments);
             console.log(sortedDepartments)
         }
-
-
-
-
 
     }, [crew])
 
@@ -285,7 +292,13 @@ const Movie = () => {
                     <div className="movie-interaction border">Rate</div>
                     <div className="movie-interaction border">Review</div>
                     <div className="movie-interaction border">Add to Watch Later</div>
-                    <div className="movie-interaction" >Rated by Users: </div>
+                    <div className="movie-interaction" >Rated by Users:
+                        <div className="movie-review-circle" style={score >= 7.5 ? ratingMovieGood
+                            : score >= 5 ? ratingMovieDecent
+                                : ratingMovieBad}>
+                            {score}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -301,8 +314,8 @@ const Movie = () => {
                     <button className="movie-details-buttons" style={toggleMovieDetails.more ? { borderBottom: "1px solid #6DAA7A" } : {}} onClick={() => { setToggleMovieDetails({ crew: false, more: true, genre: false, cast: false }) }}> More </button>
                 </div>
 
-                {toggleMovieDetails.cast ? <div className="movie-cast"> {castMembers} </div> :
-                    toggleMovieDetails.crew ? <div className="movie-cast"> {renderSortedDepartments} </div> :
+                {toggleMovieDetails.cast ? <div className="movie-cast"> {cast.length < 0 ? "No cast members" : castMembers} </div> :
+                    toggleMovieDetails.crew ? <div className="movie-cast"> {crew.length < 0 ? "No crew members" : renderSortedDepartments} </div> :
                         toggleMovieDetails.genre ? <div className="movie-cast"> {genresMovie} </div> :
                             toggleMovieDetails.more ? <div className="movie-more-information"> <p>Original Title: {props.original_title}</p> <p>Release date: {props.release_date} </p> </div> : ""}
 

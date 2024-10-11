@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Header.css"
 
 const Header = () => {
@@ -10,11 +10,22 @@ const Header = () => {
   const [genre, setGenre] = useState("");
   const [randomList, setRandomList] = useState([]);
 
+  const currentLocation = useLocation().pathname;
+  console.log(currentLocation)
+
+
 
   console.log(randomMovieGenre, randomList)
 
-  const fetchMoviesSearch = async () => {
-    const url = `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`;
+  useEffect(() => {
+    setMovie("")
+    setAllMovies([])
+
+  }, [currentLocation])
+
+  const fetchMoviesSearch = async (movieName) => {
+    setMovie(movieName)
+    const url = `https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`;
     const options = {
       method: 'GET',
       headers: {
@@ -85,10 +96,16 @@ const Header = () => {
       <Link to="/Profile"> Profile </Link>
       <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
 
-      <input type="text" name="" value={movie} onChange={(e) => {
-        setMovie(e.target.value)
-      }} />
-      <button onClick={() => { fetchMoviesSearch() }}>Search </button>
+      <div className="movie-search">
+        <input type="text" name="" className="movie-search-input" value={movie} onChange={(e) => {
+          fetchMoviesSearch(e.target.value)
+        }} />
+        <div className="movie-search-allmovies" style={allMovies.length < 1 ? { border: "none" } : {}}>
+          {allMovies.map(movie => {
+            return <Link to="/Movie" className="movie-search-movie" state={movie} > {movie.title} </Link>
+          })}
+        </div>
+      </div>
     </div>
 
 
