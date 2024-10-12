@@ -100,7 +100,7 @@ const Header = () => {
         <input type="text" name="" className="movie-search-input" value={movie} onChange={(e) => {
           fetchMoviesSearch(e.target.value)
         }} />
-        <div className="movie-search-allmovies" style={allMovies.length < 1 ? { border: "none" } : {}}>
+        <div className="movie-search-allmovies" style={allMovies.length < 1 ? { border: "none", backgroundColor: "transparent" } : {}}>
           {allMovies.map(movie => {
             return <Link to="/Movie" className="movie-search-movie" state={movie} > {movie.title} </Link>
           })}

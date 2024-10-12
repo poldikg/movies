@@ -6,6 +6,20 @@
     flex-direction: column;
     justify-content: center;
     background-color: rgba(185, 55, 55, 0.5);
+    z-index: 1;
+}
+
+.movie-background:before {
+    position: absolute;
+    height: inherit;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: inherit;
+    content: ' ';
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 2;
 }
 
 .movie-inner-background {

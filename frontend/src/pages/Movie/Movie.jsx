@@ -2,15 +2,17 @@ import React from "react";
 import "./Movie.css"
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import MoviePoster from "../../components/MoviePoster/MoviePoster";
 import { userReviews } from "./UserReviews";
+
+import MoviePoster from "../../components/MoviePoster/MoviePoster";
+import RatingStar from "../../components/RatingStar/RatingStar";
 
 const Movie = () => {
 
     const currentLocation = useLocation()
     const props = currentLocation.state;
-    console.log(props)
 
+    const [movieProps, setMovieProps] = useState(props || {})
     const [cast, setCast] = useState([]);
     const [crew, setCrew] = useState([]);
     const [similarMovies, setSimiliarMovies] = useState([]);
@@ -35,14 +37,17 @@ const Movie = () => {
     useEffect(() => {
 
         window.scrollTo(0, 0)
+        if (props) {
+            setMovieProps(props)
+        }
 
-    }, [])
+    }, [props])
 
-    console.log(cast, crew, similarMovies, movieDetails, toggleMovieDetails, sortedDepartments)
+    console.log(props)
     useEffect(() => {
 
         const fetchCast = async () => {
-            const url = `https://api.themoviedb.org/3/movie/${props.id}/credits?language=en-US`;
+            const url = `https://api.themoviedb.org/3/movie/${movieProps.id}/credits?language=en-US`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -61,7 +66,7 @@ const Movie = () => {
         }
 
         const fetchSimilarMovies = async () => {
-            const url = `https://api.themoviedb.org/3/movie/${props.id}/similar?language=en-US&page=1`;
+            const url = `https://api.themoviedb.org/3/movie/${movieProps.id}/similar?language=en-US&page=1`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -80,7 +85,7 @@ const Movie = () => {
 
         const fetchMovieDetails = async () => {
 
-            const url = `https://api.themoviedb.org/3/movie/${props.id}?language=en-US`;
+            const url = `https://api.themoviedb.org/3/movie/${movieProps.id}?language=en-US`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -99,7 +104,7 @@ const Movie = () => {
         }
 
         const fetchTrailer = async () => {
-            const urlTrailer = `https://api.themoviedb.org/3/movie/${props.id}/videos?language=en-US`;
+            const urlTrailer = `https://api.themoviedb.org/3/movie/${movieProps.id}/videos?language=en-US`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -125,7 +130,7 @@ const Movie = () => {
         fetchMovieDetails();
         fetchTrailer();
 
-    }, [])
+    }, [movieProps])
 
     useEffect(() => {
 
@@ -259,18 +264,18 @@ const Movie = () => {
 
 
     return <div>
-        <div className="movie-trailer" style={{ zIndex: isTrailerOpen ? 2 : -2, display: isTrailerOpen ? "flex" : "none" }}>
-            <iframe onMouseEnter={() => props.onHover(movieDetails.backdrop_path)} width="1200" height="580" src={`https://www.youtube.com/embed/${trailer.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="true"></iframe>
+        <div className="movie-trailer" style={{ zIndex: isTrailerOpen ? 5 : -2, display: isTrailerOpen ? "flex" : "none" }}>
+            <iframe onMouseEnter={() => movieProps.onHover(movieDetails.backdrop_path)} width="1200" height="580" src={`https://www.youtube.com/embed/${trailer.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="true"></iframe>
             <div className="movie-trailer-close-btn" onClick={() => { setIsTrailerOpen(false); }}>X </div>
         </div>
         <div className="movie-background">
 
             <div className="movie-inner-background">
-                <div className="movie-left-side">
+                <div className="movie-left-side" style={{ zIndex: 3 }}>
                     <MoviePoster
                         poster={movieDetails.poster_path}
                     />
-                    <div>
+                    <div >
                         <p>People Voted: {movieDetails.vote_count}</p>
                         <p>Likes: {Math.floor(Math.random() * 1536)}</p>
                         <p>Popularity: {movieDetails.popularity}</p>
@@ -278,7 +283,7 @@ const Movie = () => {
                     <button className="movie-play-trailer" onClick={() => { setIsTrailerOpen(true) }}>Play trailer</button>
                 </div>
 
-                <div className="movie-middle-side">
+                <div className="movie-middle-side" style={{ zIndex: 3 }}>
                     <div className="movie-middle-side-title-year">
                         <h1>{movieDetails.title}</h1>
                         <p>{/*{movieDetails.release_date.length > 1 ? movieDetails.release_date.slice(0, 4) : ""} */}directed by </p>
@@ -288,8 +293,12 @@ const Movie = () => {
                     </div>
                 </div>
 
-                <div className="movie-right-side">
-                    <div className="movie-interaction border">Rate</div>
+                <div className="movie-right-side" style={{ zIndex: 3 }}>
+                    <div className="movie-interaction border">Rate
+                        <div>
+                            <RatingStar />
+                        </div>
+                    </div>
                     <div className="movie-interaction border">Review</div>
                     <div className="movie-interaction border">Add to Watch Later</div>
                     <div className="movie-interaction" >Rated by Users:
@@ -317,7 +326,7 @@ const Movie = () => {
                 {toggleMovieDetails.cast ? <div className="movie-cast"> {cast.length < 0 ? "No cast members" : castMembers} </div> :
                     toggleMovieDetails.crew ? <div className="movie-cast"> {crew.length < 0 ? "No crew members" : renderSortedDepartments} </div> :
                         toggleMovieDetails.genre ? <div className="movie-cast"> {genresMovie} </div> :
-                            toggleMovieDetails.more ? <div className="movie-more-information"> <p>Original Title: {props.original_title}</p> <p>Release date: {props.release_date} </p> </div> : ""}
+                            toggleMovieDetails.more ? <div className="movie-more-information"> <p>Original Title: {movieProps.original_title}</p> <p>Release date: {movieProps.release_date} </p> </div> : ""}
 
                 <div className="movie-user-reviews">
                     <p>User Reviews</p>
