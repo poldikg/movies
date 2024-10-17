@@ -58,3 +58,10 @@
     width: 60%;
     margin-top: 3em;
 }
+
+.favorite-movies {
+    padding-top: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}

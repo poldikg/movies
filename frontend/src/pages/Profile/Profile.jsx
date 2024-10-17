@@ -8,9 +8,8 @@ const Profile = () => {
     const [userName, setUsername] = useState("Ivan");
     const [favMovies, setFavMovies] = useState([]);
     const favMoviesArr = [14160, 132344, 76, 80];
-    const [reRender, setReRender] = useState(1);
 
-    console.log(reRender, favMovies);
+    console.log(favMovies);
 
     const fetchMovies = async (movieId) => {
         const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
@@ -50,6 +49,20 @@ const Profile = () => {
 
     }, [])
 
+    const renderFavMovies = favMovies.map(movie => {
+        return <MoviePoster
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            synopsis={movie.overview}
+            popularity={movie.popularity}
+            poster={movie.poster_path}
+            release_date={movie.release_date}
+            original_title={movie.original_title}
+            score={movie.vote_average}
+        />
+    })
+
 
 
     return <div className="profile-page">
@@ -77,7 +90,7 @@ const Profile = () => {
         <div className="profile-bottom">
             <div className="profile-favorite-movies">
                 <p className="favorite-movies-title">Favorite movies</p>
-                <div>ahha</div>
+                <div className="favorite-movies">{renderFavMovies}</div>
             </div>
         </div>
     </div>
