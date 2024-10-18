@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import "./RatingStar.css"
 
-const RatingStar = () => {
+const RatingStar = (props) => {
 
     const stars = 5;
     const [rating, setRating] = useState(0);
@@ -22,12 +22,12 @@ const RatingStar = () => {
 
 
     return <div>
-        {[...Array(stars)].map((star, index) => {
+        {[...Array(props.rating ? props.rating : stars)].map((star, index) => {
             index += 1
             return <FaStar
                 key={index}
-                className={index <= (hover || rating) ? "active" : "inactive"}
-                size={"25px"}
+                className={index <= (hover || rating || props.rating) ? "active" : "inactive"}
+                size={props.rating ? "20px" : "25px"}
                 onClick={() => { handleClick(index) }}
                 onMouseEnter={() => { handleMouseEnter(index) }}
                 onMouseLeave={() => { handleMouseLeave() }}

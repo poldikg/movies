@@ -45,7 +45,7 @@
 }
 
 .favorite-movies-title {
-    width: 100%;
+    width: 55.5%;
     border-bottom: 1px solid var(--color-text-white);
     color: var(--color-text-green);
     font-size: 1.2rem;
@@ -57,6 +57,7 @@
     flex-direction: column;
     width: 60%;
     margin-top: 3em;
+    gap: 2em;
 }
 
 .favorite-movies {
@@ -64,4 +65,39 @@
     display: flex;
     flex-direction: row;
     gap: 0.5em;
+}
+
+.profile-reviews {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-review {
+    display: flex;
+    gap: 1em;
+}
+
+.review-title {
+    color: var(--color-text-white);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.3em;
+}
+
+.review-review {
+    color: var(--color-text-white);
+    font-weight: 300;
+    color: var(--color-text-green);
+}
+
+.review-year {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.review-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 0.5em;
 }
