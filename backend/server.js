@@ -2,7 +2,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-const movieRotuer = require("./routes/routes")
+const movieRouter = require("./routes/routes")
+const userRouter = require("./routes/user")
 
 
 const app = express();
@@ -16,16 +17,17 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use("/api/movie", movieRotuer);
+app.use("/api/movie", movieRouter);
+app.use("/api/user", userRouter)
 
 
 //Connection to DB
 mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-    app.listen(process.env.PORT, () => {
-        console.log(`Listening to port ${process.env.PORT}`)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log(`Listening to port ${process.env.PORT}`)
+        })
     })
-})
-.catch((error) => {
-    console.log(error)
-})
+    .catch((error) => {
+        console.log(error)
+    })

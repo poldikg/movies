@@ -14,7 +14,11 @@ const movieModel = new Schema({
     review: {
         type: String,
         required: true
+    },
+    movieId: {
+        type: String,
+        required: true
     }
-}, {timestamps: true})
+}, { timestamps: true })
 
-module.exports = mongoose.model("movieReview", movieModel )
+module.exports = mongoose.model("movieReview", movieModel)
