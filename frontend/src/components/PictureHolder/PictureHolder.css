@@ -23,7 +23,7 @@
     align-items: center;
 }
 
-.picture-holder-signup>button {
+.signup-button {
     background-color: var(--color-button-dark-green);
     border: none;
     font-family: "Kurale";
@@ -33,5 +33,5 @@
     border-radius: 4px;
     padding: 10px 5px;
     cursor: pointer;
-    width: 60%;
+    width: 100%;
 }

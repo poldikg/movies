@@ -6,7 +6,8 @@ import Movie from './pages/Movie/Movie'
 import Profile from './pages/Profile/Profile'
 import MovieList from './pages/MovieList/MovieList'
 import Footer from './components/Footer/Footer'
-
+import Login from './components/Login/Login'
+import Signup from './components/Signup/Signup'
 
 function App() {
   const currentLocation = useLocation().pathname;
@@ -22,6 +23,8 @@ function App() {
         <Route path='/Movie' element={<Movie />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/MovieList" element={<MovieList />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
       </Routes>
 
       <Footer />

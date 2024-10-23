@@ -95,6 +95,8 @@ const Header = () => {
       <Link to="/Home"> Home </Link>
       <Link to="/Profile"> Profile </Link>
       <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
+      <Link to="/Login"> Login </Link>
+      <Link to="/Signup"> Signup </Link>
 
       <div className="movie-search">
         <input type="text" name="" className="movie-search-input" value={movie} onChange={(e) => {
