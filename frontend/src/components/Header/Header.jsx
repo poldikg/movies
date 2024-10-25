@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
 import "./Header.css"
 
 const Header = () => {
@@ -9,6 +10,7 @@ const Header = () => {
   const [randomMovieGenre, setRandomMovieGenre] = useState([]);
   const [genre, setGenre] = useState("");
   const [randomList, setRandomList] = useState([]);
+  const { logout } = useLogout();
 
   const currentLocation = useLocation().pathname;
   console.log(currentLocation)
@@ -87,6 +89,10 @@ const Header = () => {
   }
     , [randomMovieGenre])
 
+  const handleClick = () => {
+    logout()
+  }
+
   return <div className="header">
 
     <img src="images/substitive-logo.png" alt="logo" srcset="" />
@@ -97,6 +103,7 @@ const Header = () => {
       <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
       <Link to="/Login"> Login </Link>
       <Link to="/Signup"> Signup </Link>
+      <button onClick={handleClick}>Logout</button>
 
       <div className="movie-search">
         <input type="text" name="" className="movie-search-input" value={movie} onChange={(e) => {
