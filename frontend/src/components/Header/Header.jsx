@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./Header.css"
 
 const Header = () => {
@@ -11,6 +12,7 @@ const Header = () => {
   const [genre, setGenre] = useState("");
   const [randomList, setRandomList] = useState([]);
   const { logout } = useLogout();
+  const { user } = useAuthContext();
 
   const currentLocation = useLocation().pathname;
   console.log(currentLocation)
@@ -98,12 +100,18 @@ const Header = () => {
     <img src="images/substitive-logo.png" alt="logo" srcset="" />
 
     <div className="header-right-side">
-      <Link to="/Home"> Home </Link>
-      <Link to="/Profile"> Profile </Link>
-      <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
-      <Link to="/Login"> Login </Link>
-      <Link to="/Signup"> Signup </Link>
-      <button onClick={handleClick}>Logout</button>
+      {user ? <div>
+        <Link to="/Home"> Home </Link>
+        <Link to="/Profile"> Profile </Link>
+        <button onClick={handleClick}>Logout</button>
+        <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
+      </div> : <div>
+        <Link to="/Login"> Login </Link>
+        <Link to="/Signup"> Signup </Link>
+      </div>}
+
+
+
 
       <div className="movie-search">
         <input type="text" name="" className="movie-search-input" value={movie} onChange={(e) => {
