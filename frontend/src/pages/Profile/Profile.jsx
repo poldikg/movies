@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import MoviePoster from "../../components/MoviePoster/MoviePoster";
 import RatingStar from "../../components/RatingStar/RatingStar";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 
 const Profile = () => {
@@ -12,6 +13,7 @@ const Profile = () => {
     const favMoviesArr = [14160, 132344, 76, 80];
     const recentlyWatchedArrIds = [1858, 14836, 810693, 82];
     const reviews = [...recentlyWatched].splice(0, 2);
+    const { user } = useAuthContext();
     console.log(reviews)
 
     console.log(favMovies, recentlyWatched);
@@ -68,6 +70,20 @@ const Profile = () => {
         recentlyWatchedArrIds.map(id => {
             fetchMovies(id, "recentlyWatched")
         });
+
+    }, [])
+
+    useEffect(() => {
+
+        const fetchReviews = async () => {
+
+            const response = await fetch("http://localhost:1290/api/movie/", {
+                headers: {
+                    "Authorization": `Bearer ${user.token}`
+                }
+            })
+        }
+
 
     }, [])
 

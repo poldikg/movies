@@ -106,6 +106,7 @@ const Header = () => {
         <button onClick={handleClick}>Logout</button>
         <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
       </div> : <div>
+        <Link to="/Home"> Home </Link>
         <Link to="/Login"> Login </Link>
         <Link to="/Signup"> Signup </Link>
       </div>}

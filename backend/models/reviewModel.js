@@ -16,7 +16,7 @@ const movieModel = new Schema({
         required: true
     },
     movieId: {
-        type: String,
+        type: Number,
         required: true
     }
 }, { timestamps: true })

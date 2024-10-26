@@ -3,7 +3,7 @@ const router = express.Router();
 const { PostMovieReview, DeleteMovieReview, UpdateMovieReview } = require("../controllers/controller")
 const requireAuth = require("../middleware/requireAuth");
 
-//Call the middleware before the routes
+//Call the middleware before the routes 
 router.use(requireAuth)
 
 //POST 
