@@ -8,6 +8,7 @@ import MovieList from './pages/MovieList/MovieList'
 import Footer from './components/Footer/Footer'
 import Login from './components/Login/Login'
 import Signup from './components/Signup/Signup'
+import PostReview from './components/PostReview/PostReview'
 import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path='/Movie' element={<Movie />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/MovieList" element={<MovieList />} />
+        <Route path="/PostReview" element={<PostReview />} />
         <Route path="/Login" element={!user ? <Login /> : <Navigate to="/Home" />} />
         <Route path="/Signup" element={!user ? <Signup /> : <Navigate to="/Home" />} />
       </Routes>

@@ -10,13 +10,14 @@ const Profile = () => {
     const [userName, setUsername] = useState("Ivan");
     const [favMovies, setFavMovies] = useState([]);
     const [recentlyWatched, setRecentlyWatched] = useState([]);
+    const [fetchedReviews, setFetchedReview] = useState([]);
+    const [error, setError] = useState("");
     const favMoviesArr = [14160, 132344, 76, 80];
     const recentlyWatchedArrIds = [1858, 14836, 810693, 82];
     const reviews = [...recentlyWatched].splice(0, 2);
     const { user } = useAuthContext();
-    console.log(reviews)
 
-    console.log(favMovies, recentlyWatched);
+    console.log(fetchedReviews);
 
     const fetchMovies = async (movieId, type) => {
         const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
@@ -82,8 +83,18 @@ const Profile = () => {
                     "Authorization": `Bearer ${user.token}`
                 }
             })
+
+            const json = await response.json()
+            console.log(json)
+            if (!response.ok) {
+                setError(json.error)
+            }
+            if (response.ok) {
+                setFetchedReview(json)
+            }
         }
 
+        fetchReviews()
 
     }, [])
 
@@ -182,6 +193,14 @@ const Profile = () => {
                 <div className="favorite-movies profile-reviews">{renderReviews}</div>
             </div>
         </div>
+
+        {fetchedReviews.map(review => {
+            return <div>
+                <div>{review.movieName}</div>
+                <div>{review.rating}</div>
+                <div>{review.review}</div>
+            </div>
+        })}
     </div>
 }
 

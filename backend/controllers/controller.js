@@ -5,8 +5,10 @@ const mongoose = require("mongoose")
 //POST REVIEW
 const PostMovieReview = async (req, res) => {
     const { movieName, rating, review, movieId } = req.body;
+
     try {
-        const movieReview = await movieModel.create({ movieName, rating, review, movieId });
+        const user_id = req.user._id;
+        const movieReview = await movieModel.create({ movieName, rating, review, movieId, user_id });
         res.status(200).json(movieReview);
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -48,4 +50,15 @@ const UpdateMovieReview = async (req, res) => {
     }
 }
 
-module.exports = { PostMovieReview, DeleteMovieReview, UpdateMovieReview }
+
+const GetMovieReviews = async (req, res) => {
+
+    try {
+        const user_id = req.user._id
+        const movieReviews = await movieModel.find({ user_id }).sort({ createdAt: -1 })
+        res.status(200).json(movieReviews);
+    } catch (error) {
+        res.status(400).json({ error: "This user hasn't posted any reviews" })
+    }
+}
+module.exports = { PostMovieReview, DeleteMovieReview, UpdateMovieReview, GetMovieReviews }
