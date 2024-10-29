@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { userReviews } from "./UserReviews";
 
+//Components
 import MoviePoster from "../../components/MoviePoster/MoviePoster";
 import RatingStar from "../../components/RatingStar/RatingStar";
 
@@ -11,6 +12,7 @@ const Movie = () => {
 
     const currentLocation = useLocation()
     const props = currentLocation.state;
+    console.log(props)
 
     const [movieProps, setMovieProps] = useState(props || {})
     const [cast, setCast] = useState([]);
@@ -20,6 +22,7 @@ const Movie = () => {
     const [trailer, setTrailer] = useState([]);
     const [sortedDepartments, setSortedDepartments] = useState([]);
     const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
 
     const [toggleMovieDetails, setToggleMovieDetails] = useState({
         cast: true,
@@ -275,10 +278,10 @@ const Movie = () => {
                     <MoviePoster
                         poster={movieDetails.poster_path}
                     />
-                    <div >
-                        <p>People Voted: {movieDetails.vote_count}</p>
-                        <p>Likes: {Math.floor(Math.random() * 1536)}</p>
-                        <p>Popularity: {movieDetails.popularity}</p>
+                    <div className="movie-statistics" >
+                        <p> <img className="movie-description-icons" src="images/person.png" alt="" srcset="" /> {movieDetails.vote_count}</p>
+                        <p> <img className="movie-description-icons" src="images/heart.png" alt="" srcset="" /> {Math.floor(Math.random() * 1536)}</p>
+                        <p> <img className="movie-description-icons" src="images/trend.png" alt="" srcset="" /> {props.popularity.toString().substr(0, 4)}</p>
                     </div>
                     <button className="movie-play-trailer" onClick={() => { setIsTrailerOpen(true) }}>Play trailer</button>
                 </div>

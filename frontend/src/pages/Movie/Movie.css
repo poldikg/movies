@@ -275,3 +275,23 @@
     align-items: center;
     gap: 1em;
 }
+
+.movie-left-side {
+    width: 20%;
+}
+
+.movie-description-icons {
+    width: 20%;
+    height: auto;
+}
+
+.movie-statistics {
+    display: flex;
+    justify-content: flex-start;
+    width: 45%;
+}
+
+
+.movie-statistics>p {
+    color: var(--color-text-white)
+}
