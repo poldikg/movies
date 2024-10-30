@@ -277,6 +277,10 @@
 }
 
 .movie-left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 20%;
 }
 
@@ -289,6 +293,7 @@
     display: flex;
     justify-content: flex-start;
     width: 45%;
+    gap: 0.3em;
 }
 
 

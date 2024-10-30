@@ -281,7 +281,7 @@ const Movie = () => {
                     <div className="movie-statistics" >
                         <p> <img className="movie-description-icons" src="images/person.png" alt="" srcset="" /> {movieDetails.vote_count}</p>
                         <p> <img className="movie-description-icons" src="images/heart.png" alt="" srcset="" /> {Math.floor(Math.random() * 1536)}</p>
-                        <p> <img className="movie-description-icons" src="images/trend.png" alt="" srcset="" /> {props.popularity.toString().substr(0, 4)}</p>
+                        <p> <img className="movie-description-icons" src="images/heart.png" alt="" srcset="" /> {props.popularity.toString().substr(0, 4)}</p>
                     </div>
                     <button className="movie-play-trailer" onClick={() => { setIsTrailerOpen(true) }}>Play trailer</button>
                 </div>
