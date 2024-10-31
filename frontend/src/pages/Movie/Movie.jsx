@@ -7,6 +7,7 @@ import { userReviews } from "./UserReviews";
 //Components
 import MoviePoster from "../../components/MoviePoster/MoviePoster";
 import RatingStar from "../../components/RatingStar/RatingStar";
+import PostReview from "../../components/PostReview/PostReview";
 
 const Movie = () => {
 
@@ -22,6 +23,7 @@ const Movie = () => {
     const [trailer, setTrailer] = useState([]);
     const [sortedDepartments, setSortedDepartments] = useState([]);
     const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+    const [showPostReview, setShowPostReview] = useState(false);
 
 
     const [toggleMovieDetails, setToggleMovieDetails] = useState({
@@ -267,6 +269,10 @@ const Movie = () => {
 
 
     return <div>
+        <div className="movie-post-review" style={showPostReview ? { zIndex: 5, display: "flex" } : { zIndex: -3, display: "none" }}>
+            <PostReview />
+            <div className="close-review" onClick={() => { setShowPostReview(false) }}> X</div>
+        </div>
         <div className="movie-trailer" style={{ zIndex: isTrailerOpen ? 5 : -2, display: isTrailerOpen ? "flex" : "none" }}>
             <iframe onMouseEnter={() => movieProps.onHover(movieDetails.backdrop_path)} width="1200" height="580" src={`https://www.youtube.com/embed/${trailer.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="true"></iframe>
             <div className="movie-trailer-close-btn" onClick={() => { setIsTrailerOpen(false); }}>X </div>
@@ -302,7 +308,7 @@ const Movie = () => {
                             <RatingStar />
                         </div>
                     </div>
-                    <div className="movie-interaction border">Review</div>
+                    <div className="movie-interaction border" onClick={() => { setShowPostReview(true) }}>Review</div>
                     <div className="movie-interaction border">Add to Watch Later</div>
                     <div className="movie-interaction" >Rated by Users:
                         <div className="movie-review-circle" style={score >= 7.5 ? ratingMovieGood
