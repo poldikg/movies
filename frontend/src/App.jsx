@@ -15,7 +15,6 @@ function App() {
   const currentLocation = useLocation().pathname;
   console.log(currentLocation)
   const { user } = useAuthContext();
-
   return (
     <div className='app'>
       <Header />

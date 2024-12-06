@@ -34,7 +34,7 @@ const Header = () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNTY5OTEyNi44NzY3MjIsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bf3PiFM0pPoMqKX_46G4esMm5xSrujtPEc90UhrAPLM'
+        Authorization: `Bearer ${import.meta.env.VITE_APP_SEARCH_TOKEN}`
       }
     };
     const response = await fetch(url, options);
@@ -51,7 +51,7 @@ const Header = () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzY4MzU1MS42NjQzOTYsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ITGoq0p8h04jEuI-yM-oOjpzXkwf9LcyqILRYF26yik'
+        Authorization: `Bearer ${import.meta.env.VITE_APP_SEARCH_TOKEN}`
       }
     };
 
@@ -74,7 +74,7 @@ const Header = () => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzY4MzU1MS42NjQzOTYsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ITGoq0p8h04jEuI-yM-oOjpzXkwf9LcyqILRYF26yik'
+          Authorization: `Bearer ${import.meta.env.VITE_APP_SEARCH_TOKEN}`
         }
       };
 

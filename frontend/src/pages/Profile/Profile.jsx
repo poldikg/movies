@@ -25,7 +25,7 @@ const Profile = () => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyOTEwMTEzNi41MjM2NDMsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0kvRSO_ENVbuJgOzB91kpO0xsV62zwBky06sQgN1Pow'
+                Authorization: `Bearer ${import.meta.env.VITE_APP_FETCHMOVIES_TOKEN}`
             }
         };
 

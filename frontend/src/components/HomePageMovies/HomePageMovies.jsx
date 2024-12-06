@@ -26,7 +26,7 @@ const HomePageMovies = () => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzQyOTM4Ni44NzgzODQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MfhjKgYoYqw_abikNQedx4fJ26Z6PdT36WqSgZ5XyrM'
+                Authorization: `Bearer ${import.meta.env.VITE_APP_MOVIES_TOKEN}`
             }
         };
         const responseTrailer = await fetch(urlTrailer, options);
@@ -49,7 +49,7 @@ const HomePageMovies = () => {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNjkwODM5Mi45MzgxOTcsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NROK0QdiJN-sSU97vF47-TYSF72IrsfK2GcaUFVZBhI'
+                    Authorization: `Bearer ${import.meta.env.VITE_APP_POPULAR_MOVIES_TOKEN}`
                 }
             };
 
@@ -81,7 +81,7 @@ const HomePageMovies = () => {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzA4NDk5NS45NDQ3MjMsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8THBfEHhxN7-CxGZmqvuCAKSUGLZEBKaBfrZi7f9Qm8'
+                    Authorization: `Bearer ${import.meta.env.VITE_APP_UPCOMINGMOVIES_PEOPLE_TOKEN}`
                 }
             };
 
@@ -100,7 +100,7 @@ const HomePageMovies = () => {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzA4NDk5NS45NDQ3MjMsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8THBfEHhxN7-CxGZmqvuCAKSUGLZEBKaBfrZi7f9Qm8'
+                    Authorization: `Bearer ${import.meta.env.VITE_APP_UPCOMINGMOVIES_PEOPLE_TOKEN}`
                 }
             };
 
@@ -118,7 +118,7 @@ const HomePageMovies = () => {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzUxNjY4NC45MTIwMzQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UA40NmGvMZx4QZQ3ojxN4WtzrHHCMLgUuh7E0C_0uic'
+                    Authorization: `Bearer ${import.meta.env.VITE_APP_TRENDING_MOVIES_TV_TOKEN}`
                 }
             };
 
@@ -136,7 +136,7 @@ const HomePageMovies = () => {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YzM3Mjg3ZDc2OTc3OWQwNGFiMDEzOGZmMGIwYjg4MCIsIm5iZiI6MTcyNzUxNjY4NC45MTIwMzQsInN1YiI6IjY0MTQ1NzE2YTZjMTA0MDA5YTAwM2QwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UA40NmGvMZx4QZQ3ojxN4WtzrHHCMLgUuh7E0C_0uic'
+                    Authorization: `Bearer ${import.meta.env.VITE_APP_TRENDING_MOVIES_TV_TOKEN}`
                 }
             };
 
