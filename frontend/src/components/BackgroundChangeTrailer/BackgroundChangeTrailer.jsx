@@ -11,11 +11,14 @@ const BackgroundChnageTrailer = (props) => {
         getBackground.style.backgroundPosition = "center top -100px";
     }
 
+    console.log(props)
     const renderTrailers = props.data.map(trailer => {
+
         return <Trailer
             key={trailer.movieId}
             id={trailer.movieId}
             trailer={trailer.key}
+            img={trailer.backdrop_path}
             onHover={changeBackgroundTrailer}
         />
     })

@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    padding: 1em 0em;
 }
 
 .header img {
@@ -17,7 +18,7 @@
 }
 
 .header a:hover {
-    color: var(--color-button-light-green);
+    color: var(--color-text-green);
 
 }
 
@@ -25,6 +26,14 @@
     display: flex;
     gap: 1em;
     align-items: center;
+}
+
+.header-right-side-routing {
+    display: flex;
+    flex-direction: row;
+    gap: 0.95em;
+    font-size: 0.95rem;
+    font-weight: 450;
 }
 
 .movie-search {
@@ -54,8 +63,18 @@
 
 .movie-search-input {
     padding: 0.5em;
-    border-radius: 8px;
+    border-radius: 12px;
     border: none;
-    border: 1px solid;
+    outline: none;
+    background-color: aliceblue;
+    width: 130px;
+    height: auto;
+}
 
+.movie-search-input:hover {}
+
+.header-logo {
+    font-weight: 40;
+    font-size: 1.35rem;
+    color: var(--color-text-white);
 }

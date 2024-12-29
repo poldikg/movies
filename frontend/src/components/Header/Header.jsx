@@ -97,18 +97,18 @@ const Header = () => {
 
   return <div className="header">
 
-    <img src="images/substitive-logo.png" alt="logo" srcset="" />
+    <Link to="/"><h1 className="header-logo">THEMOVIES</h1></Link>
 
     <div className="header-right-side">
-      {user ? <div>
+      {user ? <div className="header-right-side-routing">
         <Link to="/Home"> Home </Link>
         <Link to="/Profile"> Profile </Link>
         <button onClick={handleClick}>Logout</button>
         <Link to="/MovieList" state={{ randomList, genre }} onClick={fetchAllGenres}> Random List </Link>
-      </div> : <div>
-        <Link to="/Home"> Home </Link>
-        <Link to="/Login"> Login </Link>
-        <Link to="/Signup"> Signup </Link>
+      </div> : <div className="header-right-side-routing">
+        <Link to="/Home"> HOME </Link>
+        <Link to="/Login"> LOGIN </Link>
+        <Link to="/Signup"> SIGNUP </Link>
       </div>}
 
 
