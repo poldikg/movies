@@ -270,7 +270,9 @@ const Movie = () => {
 
     return <div>
         <div className="movie-post-review" style={showPostReview ? { zIndex: 5, display: "flex" } : { zIndex: -3, display: "none" }}>
-            <PostReview />
+            <PostReview
+                movieTitle={props.title}
+                movieId={props.id} />
             <div className="close-review" onClick={() => { setShowPostReview(false) }}> X</div>
         </div>
         <div className="movie-trailer" style={{ zIndex: isTrailerOpen ? 5 : -2, display: isTrailerOpen ? "flex" : "none" }}>

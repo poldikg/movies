@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSignup } from "../../hooks/useSignup";
+import "./Signup.css"
 
 const Signup = () => {
     const [email, setEmail] = useState("");
@@ -16,12 +17,14 @@ const Signup = () => {
         <div>
             <form className="signup" onSubmit={handleSubmit} >
                 <h3 style={{ color: "white" }}>Signup</h3>
-                <label htmlFor="email-signup">Email</label>
-                <input type="email" name="email-signup" onChange={(e) => { setEmail(e.target.value) }} value={email} />
-
-                <label htmlFor="password-signup">Password:</label>
-                <input type="password" name="password-signup" onChange={(e) => { setPassword(e.target.value) }} value={password} />
-
+                <div className="signup-container">
+                    <label htmlFor="email-signup">Email</label>
+                    <input type="email" name="email-signup" onChange={(e) => { setEmail(e.target.value) }} value={email} />
+                </div>
+                <div className="signup-container">
+                    <label htmlFor="password-signup">Password:</label>
+                    <input type="password" name="password-signup" onChange={(e) => { setPassword(e.target.value) }} value={password} />
+                </div>
                 <button disabled={isLoading}>Sign up</button>
                 {error && <div style={{ color: "red" }} className="error">{error}</div>}
             </form>

@@ -1,0 +1,44 @@
+.post-review {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--color-background);
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.post-review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+}
+
+.post-review-container input,
+textarea {
+    padding: 0.2em;
+    font-family: var(--text-paragraph);
+    width: 300px;
+    border-radius: 2px;
+    border: none;
+}
+
+.post-review-container input:disabled {
+    color: black;
+    background-color: white;
+}
+
+.post-review-container label {
+    color: var(--color-text-border);
+}
+
+.post-review-submitButton {
+    background-color: var(--color-button-light-blue);
+    border: none;
+    border-radius: 4px;
+    padding: 1em;
+    color: var(--color-text-white);
+    cursor: pointer;
+    font-weight: 500;
+    font-family: var(--text-paragraph);
+    font-size: 0.9rem;
+}

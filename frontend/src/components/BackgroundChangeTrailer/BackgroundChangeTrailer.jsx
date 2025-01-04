@@ -1,8 +1,14 @@
 import React from "react";
 import "./BackgroundChnageTrailer.css"
 import Trailer from "../Trailer/Trailer";
+import { useEffect } from "react";
 
 const BackgroundChnageTrailer = (props) => {
+    console.log(props)
+    useEffect(() => {
+        // Add a background when the component loads
+
+    }, [])
 
     const changeBackgroundTrailer = (img) => {
         const getBackground = document.querySelector(".hover-background-change-trailers");

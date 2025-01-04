@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import "./PostReview.css"
 
-const PostReview = () => {
-    const [movieName, setMovieName] = useState();
+const PostReview = (props) => {
+    const [movieName, setMovieName] = useState(props.movieTitle);
     const [rating, setMovieRating] = useState();
     const [review, setMovieReview] = useState();
-    const [movieId, setMovieId] = useState(1841);
+    const [movieId, setMovieId] = useState(props.movieId);
     const [error, setError] = useState(null);
     const { user } = useAuthContext();
     console.log(movieName, rating, review, movieId);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -41,14 +43,20 @@ const PostReview = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="movie_name">Movie Name</label>
-                <input type="text" id="movie_name" value={movieName} onChange={(e) => { setMovieName(e.target.value) }} />
-                <label htmlFor="rating">Movie Rating</label>
-                <input type="number" name="" id="rating" value={rating} onChange={(e) => { setMovieRating(e.target.value) }} />
-                <label htmlFor="review">Movie Review</label>
-                <textarea name="" id="review" value={review} onChange={(e) => { setMovieReview(e.target.value) }}></textarea>
-                <button>Submit Review</button>
+            <form className="post-review" onSubmit={handleSubmit}>
+                <div className="post-review-container">
+                    <label htmlFor="movie_name"> Name</label>
+                    <input type="text" id="movie_name" value={props.movieTitle} onChange={(e) => { setMovieName(e.target.value) }} disabled={true} />
+                </div>
+                <div className="post-review-container">
+                    <label htmlFor="rating"> Rating</label>
+                    <input type="number" name="" id="rating" value={rating} onChange={(e) => { setMovieRating(e.target.value) }} max={5} min={1} />
+                </div>
+                <div className="post-review-container">
+                    <label htmlFor="review"> Review</label>
+                    <textarea name="" id="review" value={review} onChange={(e) => { setMovieReview(e.target.value) }} rows={5}></textarea>
+                </div>
+                <button className="post-review-submitButton">Submit</button>
                 {error && <div>{error}</div>}
             </form>
         </div>

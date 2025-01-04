@@ -1,0 +1,35 @@
+.signup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 1em;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container input {
+    width: 250px;
+    height: 25px;
+    border: none;
+    border-radius: 2px;
+    padding-left: 0.3em;
+    font-family: var(--text-paragraph);
+    font-size: 0.9rem;
+}
+
+.signup button {
+    padding: 0.5em 2em;
+    width: 180px;
+    cursor: pointer;
+    font-family: var(--text-paragraph);
+    font-weight: 500;
+    font-size: 0.9rem;
+    background-color: var(--color-text-green);
+    border: none;
+    border-radius: 2px;
+    color: white;
+}
