@@ -8,12 +8,13 @@ import { userReviews } from "./UserReviews";
 import MoviePoster from "../../components/MoviePoster/MoviePoster";
 import RatingStar from "../../components/RatingStar/RatingStar";
 import PostReview from "../../components/PostReview/PostReview";
+import Error from "../Error/Error";
 
 const Movie = () => {
 
     const currentLocation = useLocation()
     const props = currentLocation.state;
-    console.log(props)
+    console.log(currentLocation)
 
     const [movieProps, setMovieProps] = useState(props || {})
     const [cast, setCast] = useState([]);
@@ -45,6 +46,7 @@ const Movie = () => {
         if (props) {
             setMovieProps(props)
         }
+
 
     }, [props])
 
@@ -267,12 +269,13 @@ const Movie = () => {
         </div>
     })
 
-
+    console.log(props)
     return <div>
+
         <div className="movie-post-review" style={showPostReview ? { zIndex: 5, display: "flex" } : { zIndex: -3, display: "none" }}>
             <PostReview
-                movieTitle={props.title}
-                movieId={props.id} />
+                movieTitle={movieProps.original_title}
+                movieId={movieProps.id} />
             <div className="close-review" onClick={() => { setShowPostReview(false) }}> X</div>
         </div>
         <div className="movie-trailer" style={{ zIndex: isTrailerOpen ? 5 : -2, display: isTrailerOpen ? "flex" : "none" }}>
@@ -284,6 +287,12 @@ const Movie = () => {
             <div className="movie-inner-background">
                 <div className="movie-left-side" style={{ zIndex: 3 }}>
                     <MoviePoster
+                        id={movieDetails.id}
+                        original_title={movieDetails.original_title}
+                        popularity={movieDetails.popularity}
+                        release_date={movieDetails.release_date}
+                        score={movieDetails.vote_average}
+                        synopsis={movieDetails.overview}
                         poster={movieDetails.poster_path}
                     />
                     <div className="movie-statistics" >
